@@ -46,7 +46,7 @@ export const getContactos = async (dispatch) => {
         }
         const data = await response.json()
         dispatch ({
-            type: "SaveContact",
+            type: "SaveContacts",
             payload: data.contacts
         });
         return data.contacts;
@@ -63,10 +63,10 @@ export const createContact = async (contact) => {
         "email":contact.email
     }
     try {
-        const response = await fetch(`${urlBase}${userName}`, {
+        const response = await fetch(`${urlBase}${userName}/contacts`, {
             method: "POST",
             headers: {
-                "Contect-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(contactoEnviar)
         });
@@ -75,7 +75,7 @@ export const createContact = async (contact) => {
             throw new Error(`Error al crear contacto Estatus: ${response.status}. Detalles: ${errorDetails.substring(0, 100)}...`)
         }
         const data = await response.json()
-        console.log("Contacto creado:", contactoEnviar);
+        console.log("Contacto creado :D :", contactoEnviar);
         return data;
     } catch (error) {
         console.log(`Error al crear el contacto`, error)
@@ -123,7 +123,7 @@ export const deleteContacts = async (id) => {
             throw new Error(`Error al eliminar el contacto. Estatus: ${response.status}. Detalles: ${errorDetails.substring(0, 100)}...`);
         }
         if (response.status === 204) {
-            return { message: "Contacto eliminado con éxito" };
+            return { message: "Contacto eliminado :c" };
         }
         return await response.json();
     } catch (error) {
